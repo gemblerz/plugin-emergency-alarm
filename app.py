@@ -7,7 +7,7 @@ from demo_interfaces.msg import Heartbeat, EmergencyAlert
 
 class AlertManager(Node):
     def __init__(self):
-        super().__init__('demo_object_detector')
+        super().__init__('emergency_alert_manager')
         self.objects = dict()
         self.name = self.get_namespace()[1:]
         self.pub_heartbeat = self.create_publisher(Heartbeat, 'state', 10)

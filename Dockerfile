@@ -9,6 +9,7 @@ WORKDIR $ROS_WS
 SHELL ["/bin/bash", "-c"]
 RUN source $ROS_ROOT/setup.bash && colcon build --symlink-install && source $ROS_WS/install/setup.bash
 
+COPY . /app/
 WORKDIR /app
-# ENTRYPOINT ["/ros_entrypoint.sh"]
-ENTRYPOINT ["python3", "/app/app.py"]
+ENTRYPOINT ["/app/ros_entrypoint.sh"]
+CMD ["python3", "/app/app.py"]
