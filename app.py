@@ -21,16 +21,26 @@ class AlertManager(Node):
         self.objects[msg.data] = time.time()
 
     def timer_callback(self):
+        if "dog" in self.object:
+            msg = EmergencyAlert()
+            msg.message = "A cat is detected!"
+            msg.is_emergency = True
+            self.pub_alert.publish(msg)
+        else:
+            msg = EmergencyAlert()
+            msg.message = ""
+            msg.is_emergency = False
+            self.pub_alert.publish(msg)
         # msg = Heartbeat()
         # msg.data = "BUSY"
         # self.pub_heartbeat.publish(msg)
-        if "cat" in self.objects:
-            # if a cat was detected within 5 seconds
-            if time.time() - self.objects["cat"] < 5.:
-                msg = EmergencyAlert()
-                msg.message = "A cat is detected!"
-                msg.is_emergency = True
-                self.pub_alert.publish(msg)
+        # if "cat" in self.objects:
+        #     # if a cat was detected within 5 seconds
+        #     if time.time() - self.objects["dog"] < 5.:
+        #         msg = EmergencyAlert()
+        #         msg.message = "A cat is detected!"
+        #         msg.is_emergency = True
+        #         self.pub_alert.publish(msg)
 
 
 
